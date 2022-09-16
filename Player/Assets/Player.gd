@@ -28,11 +28,7 @@ var gravity_normal = DEFAULT_GRAVITY
 var gravity_zchanged = false
 var wind_influence = {}
 
-var movement_dir = 0
-var climb_dir = 0
-var inv_mov = 1
 var velocity = Vector2()
-var climb_origin
 
 var jump = false
 var jump_left = jump_count
@@ -60,21 +56,6 @@ func _physics_process(delta):
 	state = get_state()
 	calculate_sprite()
 	var snap = 8
-	climb_dir = 0
-	
-	#Speed Smoothing
-	var n_speed = speed * movement_dir
-	
-	if is_on_floor():
-		if abs(n_speed) > abs(velocity.x):
-			velocity.x = (5*velocity.x + n_speed)/6
-		else:
-			if abs(velocity.x) > 5:
-				velocity.x = (3*velocity.x + n_speed)/4
-			else:
-				velocity.x = 0
-	else:
-		velocity.x = (7*velocity.x + n_speed)/8
 	
 	if is_on_floor():
 		on_ground = true
@@ -170,14 +151,6 @@ func calculate_wind() -> Vector2:
 func calculate_sprite():
 	sprite.playing = true
 	sprite.speed_scale = 1
-	
-	var n_rot = rad2deg(gravity_normal.angle()) - 90
-	rotation_degrees = n_rot
-	
-	if movement_dir < 0:
-		sprite.flip_h = true
-	elif movement_dir > 0:
-		sprite.flip_h = false
 	
 	if state == STATES.Walk:
 		sprite.animation = "walk"
