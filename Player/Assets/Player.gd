@@ -191,8 +191,6 @@ func calculate_sprite():
 	
 	if state == STATES.Walk:
 		sprite.animation = "walk"
-		if movement_dir == 0:
-			sprite.speed_scale = clamp((abs(velocity.x) / speed)*4,0,1)
 	elif state == STATES.Jump:
 		sprite.scale = (sprite.scale + Vector2(1.18,0.85))/2
 		
@@ -223,7 +221,7 @@ func calculate_sprite():
 func get_state():
 	var n_state = STATES.Walk
 	
-	if is_on_floor() && velocity.x != 0:
+	if is_on_floor():
 		n_state = STATES.Walk
 	elif !is_on_floor() && velocity.y < 0:
 		n_state = STATES.Jump
