@@ -3,7 +3,8 @@ extends KinematicBody2D
 onready var rot_tween = $RotTween
 onready var stween = $STween
 onready var sprite = $Sprite
-onready var audio = $AudioStreamPlayer
+onready var jump_audio = $JumpSoundStream
+onready var honk_audio = $HonkSoundStream
 
 export var speed = 200
 
@@ -75,8 +76,8 @@ func _physics_process(delta):
 		state = STATES.Jump
 		
 		velocity.y = jump_velocity
-		if audio.get_playback_position() == 0 || audio.get_playback_position() >= 0.1 || !audio.playing:
-			audio.play()
+		if jump_audio.get_playback_position() == 0 || jump_audio.get_playback_position() >= 0.1 || !jump_audio.playing:
+			jump_audio.play()
 	else:
 		velocity.y += get_gravity() * delta
 	
@@ -98,6 +99,10 @@ func get_input():
 	
 	var try_jump = false
 	
+	if Input.is_action_just_pressed("honk"):
+		if honk_audio.get_playback_position() == 0 || honk_audio.get_playback_position() >= 0.1 || !honk_audio.playing:
+			honk_audio.play()
+		
 	if Input.is_action_just_pressed("jump") || (Input.is_action_just_pressed("up") && on_ground && is_on_wall()):
 		try_jump = true
 	elif Input.is_action_just_pressed("down") && gravity_normal.y < 0:
