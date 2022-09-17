@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://UI/Transition/Transition.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/Menu.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://World/Side World.png" type="Texture" id=4]
 [ext_resource path="res://Objects/DeathTrigger/DeathTrigger.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/Trampoline/Trampoline.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Objects/Coin/Coin.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Fonts/yoster.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://UI/DialogBox/DialogBox.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Objects/DialogArea/Assets/Sign.png" type="Texture" id=11]
@@ -204,18 +203,6 @@ position = Vector2( 164, 78 )
 
 [node name="Trampoline2" parent="WorldMap" instance=ExtResource( 7 )]
 position = Vector2( 82, 60 )
-
-[node name="Coin" parent="WorldMap" instance=ExtResource( 8 )]
-position = Vector2( 84, 38 )
-
-[node name="Coin2" parent="WorldMap" instance=ExtResource( 8 )]
-position = Vector2( 14, 86 )
-
-[node name="Coin3" parent="WorldMap" instance=ExtResource( 8 )]
-position = Vector2( 172, 120 )
-
-[node name="Coin4" parent="WorldMap" instance=ExtResource( 8 )]
-position = Vector2( 248, 68 )
 
 [node name="DialogArea" parent="WorldMap" instance=ExtResource( 12 )]
 position = Vector2( 200, 120 )

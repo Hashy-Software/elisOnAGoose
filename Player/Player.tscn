@@ -99,7 +99,7 @@ animations = [ {
 radius = 52.0
 
 [node name="Player" type="KinematicBody2D"]
-scale = Vector2( 0.3, 0.3 )
+scale = Vector2( 0.8, 0.8 )
 collision_layer = 2
 script = ExtResource( 1 )
 
@@ -107,7 +107,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, 8 )
 frames = SubResource( 2 )
 animation = "walk"
-frame = 14
+frame = 2
 playing = true
 offset = Vector2( 0, -8 )
 
@@ -140,7 +140,7 @@ text = "State"
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 0, -23 )
 current = true
-zoom = Vector2( 0.4, 0.4 )
+zoom = Vector2( 0.8, 0.8 )
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true

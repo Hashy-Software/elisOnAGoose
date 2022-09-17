@@ -51,7 +51,7 @@ var last_state = state
 func _process(_delta):
 	get_input()
 	$Label.text = STATES.keys()[state]# + " -- " + str(rotation_degrees)
-	velocity.x = 100
+	velocity.x = speed
 
 func _physics_process(delta):
 	last_state = state
