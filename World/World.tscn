@@ -203,7 +203,7 @@ start = "right"
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 558, 242 )
-speed = 600
+speed = 500
 
 [node name="UI" type="CanvasLayer" parent="."]
 

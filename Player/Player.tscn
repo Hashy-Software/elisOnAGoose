@@ -1,79 +1,96 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player/Assets/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Assets/elisOnAGoose_spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://Player/Assets/honk-sound.mp3" type="AudioStream" id=3]
-[ext_resource path="res://Player/Assets/Jump.wav" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=22]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 112, 0, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=20]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 0, 224, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=21]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 224, 0, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=5]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=6]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 112, 0, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=7]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 224, 0, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=8]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 336, 0, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=9]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 448, 0, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=10]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 0, 112, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=11]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 112, 112, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=12]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 224, 112, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=13]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 336, 112, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=14]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 448, 112, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=15]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 0, 224, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=16]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 112, 224, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=17]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 224, 224, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=18]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 336, 224, 112, 112 )
 
 [sub_resource type="AtlasTexture" id=19]
+flags = 8
 atlas = ExtResource( 2 )
 region = Rect2( 448, 224, 112, 112 )
 
@@ -107,7 +124,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, 8 )
 frames = SubResource( 2 )
 animation = "walk"
-frame = 2
+frame = 8
 playing = true
 offset = Vector2( 0, -8 )
 
@@ -138,7 +155,7 @@ margin_bottom = -10.0
 text = "State"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 0, -23 )
+offset = Vector2( 100, -23 )
 current = true
 zoom = Vector2( 0.8, 0.8 )
 drag_margin_h_enabled = true
@@ -150,9 +167,6 @@ drag_margin_right = 0.05
 
 [node name="HonkSoundStream" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-
-[node name="JumpSoundStream" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
 
 [connection signal="timeout" from="Coyote" to="." method="_on_Coyote_timeout"]
 [connection signal="timeout" from="BufferJump" to="." method="_on_BufferJump_timeout"]
