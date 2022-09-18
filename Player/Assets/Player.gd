@@ -50,9 +50,9 @@ var last_state = state
 func _process(_delta):
 	get_input()
 	$Label.text = STATES.keys()[state]# + " -- " + str(rotation_degrees)
-	velocity.x = speed
 
 func _physics_process(delta):
+	velocity.x = speed * delta
 	last_state = state
 	state = get_state()
 	calculate_sprite()
