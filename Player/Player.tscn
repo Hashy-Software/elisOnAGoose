@@ -124,6 +124,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, 8 )
 frames = SubResource( 2 )
 animation = "walk"
+frame = 13
 playing = true
 offset = Vector2( 0, -8 )
 
@@ -154,7 +155,6 @@ margin_bottom = -10.0
 text = "State"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 100, -23 )
 current = true
 zoom = Vector2( 0.8, 0.8 )
 drag_margin_h_enabled = true
