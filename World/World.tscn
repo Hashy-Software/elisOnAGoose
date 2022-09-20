@@ -1,26 +1,17 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://World/Background.tres" type="TileSet" id=1]
 [ext_resource path="res://Objects/DeathTrigger/DeathTrigger.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Objects/Coin/Coin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/CoinCounter/CoinCounter.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Objects/Teleporter/TeleporterArea.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Cloud Platform/Cloud Platform.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Foreground.tres" type="TileSet" id=8]
-[ext_resource path="res://Objects/Teleporter/Assets/Door.png" type="Texture" id=9]
 [ext_resource path="res://UI/Transition/Transition.tscn" type="PackedScene" id=10]
 [ext_resource path="res://World/World.gd" type="Script" id=11]
 [ext_resource path="res://Fonts/yoster.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://World/Congrulations.gd" type="Script" id=13]
 [ext_resource path="res://Objects/Burguer/Burger.tscn" type="PackedScene" id=14]
 [ext_resource path="res://UI/DialogBox/DialogBox.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Objects/DialogArea/DialogArea.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Objects/Wind/Wind.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Objects/BlockSwitch/Switch.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Objects/Trampoline/Trampoline.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Objects/BoostGem/BoostGem.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Objects/Swing/Swing.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 23, 215 )
@@ -122,95 +113,17 @@ scale = Vector2( 512, 1 )
 [node name="Coin" parent="Objects" instance=ExtResource( 3 )]
 position = Vector2( 1396, 263 )
 
-[node name="Cloud" parent="Objects" instance=ExtResource( 7 )]
-position = Vector2( -19, 477 )
-
-[node name="Cloud3" parent="Objects" instance=ExtResource( 7 )]
-position = Vector2( -100, 296 )
-
-[node name="TP Cave" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( 936, 618 )
-destination = NodePath("../TP Mount")
-
-[node name="Door" type="Sprite" parent="Objects/TP Cave"]
-texture = ExtResource( 9 )
-
-[node name="TP Mount" parent="Objects" instance=ExtResource( 6 )]
-position = Vector2( 1408, 24 )
-destination = NodePath("../TP Cave")
-
-[node name="Door" type="Sprite" parent="Objects/TP Mount"]
-texture = ExtResource( 9 )
-
 [node name="Coin2" parent="Objects" instance=ExtResource( 3 )]
 position = Vector2( 2526, 277 )
 
 [node name="Coin3" parent="Objects" instance=ExtResource( 3 )]
 position = Vector2( 3504, 274 )
 
-[node name="Coin4" parent="Objects" instance=ExtResource( 3 )]
-position = Vector2( 232, -88 )
-
 [node name="Coin5" parent="Objects" instance=ExtResource( 3 )]
 position = Vector2( 5000, 184 )
 
-[node name="Danger" parent="Objects" instance=ExtResource( 16 )]
-position = Vector2( 180, 601 )
-scale = Vector2( 1, 8 )
-text = "DANGER!
-Don't climb any further"
-
-[node name="Danger2" parent="Objects" instance=ExtResource( 16 )]
-position = Vector2( 1544, 512 )
-scale = Vector2( 1, 8 )
-text = "DANGER!
-Don't climb any further"
-
-[node name="Wind" parent="Objects" instance=ExtResource( 17 )]
-position = Vector2( 1344, -176 )
-rotation = -1.48353
-scale = Vector2( 12, 17 )
-z_index = -1
-strength = 128
-
-[node name="Coin6" parent="Objects" instance=ExtResource( 3 )]
-position = Vector2( 1392, -328 )
-
-[node name="BoostGem" parent="Objects" instance=ExtResource( 20 )]
-position = Vector2( 111, 222 )
-
 [node name="Coin7" parent="Objects" instance=ExtResource( 3 )]
 position = Vector2( 6184, 207 )
-
-[node name="BoostGem2" parent="Objects" instance=ExtResource( 20 )]
-position = Vector2( -336, 144 )
-
-[node name="BoostGem3" parent="Objects" instance=ExtResource( 20 )]
-position = Vector2( -256, 120 )
-
-[node name="BoostGem4" parent="Objects" instance=ExtResource( 20 )]
-position = Vector2( -144, 120 )
-
-[node name="BoostGem5" parent="Objects" instance=ExtResource( 20 )]
-position = Vector2( -24, 144 )
-
-[node name="BoostGem6" parent="Objects" instance=ExtResource( 20 )]
-position = Vector2( -336, 72 )
-
-[node name="BoostGem7" parent="Objects" instance=ExtResource( 20 )]
-position = Vector2( -336, 8 )
-
-[node name="BoostGem8" parent="Objects" instance=ExtResource( 20 )]
-position = Vector2( -336, -48 )
-
-[node name="Switch" parent="Objects" instance=ExtResource( 18 )]
-position = Vector2( -336, -104 )
-scale = Vector2( 1, -1 )
-
-[node name="Swing" parent="Objects" instance=ExtResource( 21 )]
-position = Vector2( 48, -256 )
-length = 256
-start = "right"
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 434, 221 )
@@ -262,9 +175,6 @@ margin_bottom = -16.0
 [node name="Transition" parent="UI" instance=ExtResource( 10 )]
 visible = false
 start_closed = true
-
-[node name="Trampoline" parent="." instance=ExtResource( 19 )]
-position = Vector2( -91, 423 )
 
 [node name="Burger" parent="." instance=ExtResource( 14 )]
 position = Vector2( 985, 268 )
