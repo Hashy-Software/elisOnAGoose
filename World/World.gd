@@ -43,6 +43,7 @@ func _fill_tile_array():
 	var rect = tilemap.tile_set.tile_get_region(id)
 	var size_x = rect.size.x / tiles.autotile_get_size(id).x
 	var size_y = rect.size.y / tiles.autotile_get_size(id).y
+	
 	for x in range(size_x):
 		for y in range(size_y):
 			var priority = tiles.autotile_get_subtile_priority(id, Vector2(x, y))
@@ -60,7 +61,7 @@ func _add_random_ground_tiles(n_tiles: int):
 		_last_tile_pos = new_pos
 
 func _remove_ground_tiles(n_tiles: int):
-	# Start deleting 20 tiles before last
+	# Start deleting 200 tiles before last
 	var start = _last_tile_pos.x - 200
 	for x in range(start, start - n_tiles, -1):
 		tilemap.set_cell(x, _last_tile_pos.y, -1)
