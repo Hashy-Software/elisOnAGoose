@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://World/Background.tres" type="TileSet" id=1]
 [ext_resource path="res://Objects/DeathTrigger/DeathTrigger.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://World/World.gd" type="Script" id=11]
 [ext_resource path="res://Fonts/yoster.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://World/Congrulations.gd" type="Script" id=13]
+[ext_resource path="res://Objects/Burguer/Burger.tscn" type="PackedScene" id=14]
 [ext_resource path="res://UI/DialogBox/DialogBox.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Objects/DialogArea/DialogArea.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Objects/Wind/Wind.tscn" type="PackedScene" id=17]
@@ -119,7 +120,7 @@ position = Vector2( 512, 592 )
 scale = Vector2( 512, 1 )
 
 [node name="Coin" parent="Objects" instance=ExtResource( 3 )]
-position = Vector2( 1393, 248 )
+position = Vector2( 1396, 263 )
 
 [node name="Cloud" parent="Objects" instance=ExtResource( 7 )]
 position = Vector2( -19, 477 )
@@ -142,10 +143,10 @@ destination = NodePath("../TP Cave")
 texture = ExtResource( 9 )
 
 [node name="Coin2" parent="Objects" instance=ExtResource( 3 )]
-position = Vector2( 2526, 216 )
+position = Vector2( 2526, 277 )
 
 [node name="Coin3" parent="Objects" instance=ExtResource( 3 )]
-position = Vector2( 3503, 225 )
+position = Vector2( 3504, 274 )
 
 [node name="Coin4" parent="Objects" instance=ExtResource( 3 )]
 position = Vector2( 232, -88 )
@@ -179,7 +180,7 @@ position = Vector2( 1392, -328 )
 position = Vector2( 111, 222 )
 
 [node name="Coin7" parent="Objects" instance=ExtResource( 3 )]
-position = Vector2( 6182, 178 )
+position = Vector2( 6184, 207 )
 
 [node name="BoostGem2" parent="Objects" instance=ExtResource( 20 )]
 position = Vector2( -336, 144 )
@@ -264,5 +265,14 @@ start_closed = true
 
 [node name="Trampoline" parent="." instance=ExtResource( 19 )]
 position = Vector2( -91, 423 )
+
+[node name="Burger" parent="." instance=ExtResource( 14 )]
+position = Vector2( 985, 268 )
+
+[node name="Burger" parent="Burger" instance=ExtResource( 14 )]
+position = Vector2( 943, -2 )
+
+[node name="Burger" parent="Burger/Burger" instance=ExtResource( 14 )]
+position = Vector2( 928, 8 )
 
 [connection signal="body_entered" from="Objects/MapGenerator" to="." method="_on_MapGenerator_body_entered"]

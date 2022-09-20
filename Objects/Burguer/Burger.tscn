@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Objects/Burguer/burger_spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Burguer/Burger.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 62, 60 )
@@ -88,6 +89,8 @@ animations = [ {
 [node name="Burger" type="Node2D"]
 
 [node name="BurgerArea" type="Area2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 2 )
 
 [node name="BurgerCollisionShape" type="CollisionShape2D" parent="BurgerArea"]
 position = Vector2( 2, -1 )
@@ -95,5 +98,7 @@ shape = SubResource( 1 )
 
 [node name="BurgerAnimation" type="AnimatedSprite" parent="BurgerArea"]
 frames = SubResource( 20 )
-frame = 4
+frame = 14
 playing = true
+
+[connection signal="body_shape_entered" from="BurgerArea" to="BurgerArea" method="_on_BurgerArea_body_shape_entered"]
