@@ -101,9 +101,7 @@ shape = SubResource( 1 )
 
 [node name="BurgerAnimation" type="AnimatedSprite" parent="BurgerArea"]
 frames = SubResource( 20 )
-frame = 11
+frame = 13
 playing = true
 
 [connection signal="body_shape_entered" from="BurgerArea" to="BurgerArea" method="_on_BurgerArea_body_shape_entered"]
-[connection signal="screen_exited" from="BurgerArea/VisibilityNotifier2D" to="BurgerArea" method="_on_VisibilityNotifier2D_screen_exited"]
-[connection signal="viewport_exited" from="BurgerArea/VisibilityNotifier2D" to="BurgerArea" method="_on_VisibilityNotifier2D_viewport_exited"]

@@ -17,7 +17,7 @@ func _ready():
 func reposition_ahead():
 	position.x += rand_range(1000, 2500)
 
-func _on_BurgerArea_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_BurgerArea_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
 	reposition_ahead()
 
 func _on_screen_exited():

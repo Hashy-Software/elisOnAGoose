@@ -3,6 +3,7 @@ extends Node2D
 onready var transition = $UI/Transition
 onready var tilemap = $WorldMap
 onready var player = $Player
+onready var player_sprite = $Player/Sprite
 onready var map_generator = $Objects/MapGenerator
 
 var _tile_creator_timer = null
@@ -53,7 +54,7 @@ func _fill_tile_array():
 func _add_random_ground_tiles(n_tiles: int):
 	var id = tilemap.tile_set.get_tiles_ids()[-1]
 	
-	for i in range(n_tiles):
+	for _i in range(n_tiles):
 		var random_tile_vec2d = _tile_array_vector2ds[rand_range(0, _tile_array_vector2ds.size())]
 		var new_pos = Vector2(_last_tile_pos.x + 1, _last_tile_pos.y)
 		#print("Placed random ground tile at %s " % new_pos)
@@ -78,7 +79,6 @@ func _on_MapGenerator_body_entered(_collided_body):
 
 
 func _on_SpeedIncreaseTimer_timeout():
-	player.speed=50000
 	if player.speed < 50000:
-		print("Player speed increased to ", player.speed)
 		player.speed += 200
+		#print("Player speed increased to ", player.speed)

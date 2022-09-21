@@ -14,7 +14,7 @@ func collect():
 func reposition_ahead():
 	position.x += rand_range(1000, 2500)
 
-func _on_Coin_body_entered(body):
+func _on_Coin_body_entered(_body):
 	collect()
 	reposition_ahead()
 
