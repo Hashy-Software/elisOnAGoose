@@ -333,7 +333,7 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -4 )
 frames = SubResource( 1 )
-frame = 17
+frame = 25
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -350,6 +350,8 @@ anims/RESET = SubResource( 4 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -10.0
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_Coin_body_entered"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]

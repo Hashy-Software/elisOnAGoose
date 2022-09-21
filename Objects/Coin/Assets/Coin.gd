@@ -1,27 +1,22 @@
 extends Area2D
 
 onready var audio = $AudioStreamPlayer
-
-var collected = false
+onready var notifier = $VisibilityNotifier2D
 
 func _ready():
 	Global.init_coin()
+	notifier.connect("screen_exited", self, "_on_screen_exited")
 
 func collect():
-	if collected:
-		return
-	collected = true
-	
-	if Global.max_coins != 1:
-		audio.pitch_scale = (float(Global.current_coins) / (Global.max_coins - 1)) + 1
-	print(audio.pitch_scale)
 	Global.collect_coin()
 	audio.play(0)
-	visible = false
+	
+func reposition_ahead():
+	position.x += rand_range(1000, 2500)
 
 func _on_Coin_body_entered(body):
-	if body.has_method("is_player"):
-		collect()
+	collect()
+	reposition_ahead()
 
-func _on_AudioStreamPlayer_finished():
-	queue_free()
+func _on_screen_exited():
+	reposition_ahead()
