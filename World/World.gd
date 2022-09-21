@@ -75,3 +75,10 @@ func _on_MapGenerator_body_entered(_collided_body):
 	_remove_ground_tiles(tile_amount)
 	
 	map_generator.position.x += tile_amount * tile_size
+
+
+func _on_SpeedIncreaseTimer_timeout():
+	player.speed=50000
+	if player.speed < 50000:
+		print("Player speed increased to ", player.speed)
+		player.speed += 200

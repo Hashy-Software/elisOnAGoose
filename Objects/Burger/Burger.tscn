@@ -101,7 +101,7 @@ shape = SubResource( 1 )
 
 [node name="BurgerAnimation" type="AnimatedSprite" parent="BurgerArea"]
 frames = SubResource( 20 )
-frame = 5
+frame = 11
 playing = true
 
 [connection signal="body_shape_entered" from="BurgerArea" to="BurgerArea" method="_on_BurgerArea_body_shape_entered"]
