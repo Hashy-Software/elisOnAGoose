@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Objects/Burger/Burger.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Burger/burger_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://Objects/Burger/munch.mp3" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 62, 60 )
@@ -101,7 +102,11 @@ shape = SubResource( 1 )
 
 [node name="BurgerAnimation" type="AnimatedSprite" parent="BurgerArea"]
 frames = SubResource( 20 )
-frame = 13
+frame = 6
 playing = true
+
+[node name="MunchPlayer" type="AudioStreamPlayer" parent="BurgerArea"]
+stream = ExtResource( 3 )
+volume_db = -18.0
 
 [connection signal="body_shape_entered" from="BurgerArea" to="BurgerArea" method="_on_BurgerArea_body_shape_entered"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/munch.mp3-1139be82870b4c5b867bc24f8fed0e3d.mp3str"
+
+[deps]
+
+source_file="res://Objects/Burger/munch.mp3"
+dest_files=[ "res://.import/munch.mp3-1139be82870b4c5b867bc24f8fed0e3d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
