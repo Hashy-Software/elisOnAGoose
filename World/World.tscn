@@ -176,13 +176,10 @@ margin_bottom = -16.0
 visible = false
 start_closed = true
 
+[node name="Burger2" parent="." instance=ExtResource( 14 )]
+position = Vector2( 1590, 138 )
+
 [node name="Burger" parent="." instance=ExtResource( 14 )]
 position = Vector2( 985, 268 )
-
-[node name="Burger" parent="Burger" instance=ExtResource( 14 )]
-position = Vector2( 943, -2 )
-
-[node name="Burger" parent="Burger/Burger" instance=ExtResource( 14 )]
-position = Vector2( 928, 8 )
 
 [connection signal="body_entered" from="Objects/MapGenerator" to="." method="_on_MapGenerator_body_entered"]
