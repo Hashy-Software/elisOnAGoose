@@ -44,7 +44,7 @@ tile_data = PoolIntArray( 1310715, 8, 0, 1310716, 8, 0, 1310717, 8, 0, 1310718, 
 position = Vector2( 548, 224 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/MapGenerator"]
-position = Vector2( -20, -142 )
+position = Vector2( -290, -152 )
 shape = SubResource( 16 )
 
 [node name="DeathTrigger" parent="Objects" instance=ExtResource( 2 )]
@@ -58,10 +58,12 @@ position = Vector2( 1396, 263 )
 position = Vector2( 2206, 139 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 437, 224 )
+position = Vector2( 147, 242 )
 scale = Vector2( 1, 1 )
-speed = 20000
+speed = 30000
 jump_height = 120.0
+jump_time_to_peak = 0.25
+jump_time_to_descent = 0.25
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -83,19 +85,10 @@ position = Vector2( 1847, 143 )
 [node name="Burger" parent="." instance=ExtResource( 14 )]
 position = Vector2( 985, 268 )
 
-[node name="SpeedIncreaseTimer" type="Timer" parent="."]
-autostart = true
-
 [node name="GasGasGas" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -18.0
 autoplay = true
 
-[node name="GasSpeedLinesTimer" type="Timer" parent="."]
-wait_time = 40.5
-one_shot = true
-autostart = true
-
 [connection signal="body_entered" from="Objects/MapGenerator" to="." method="_on_MapGenerator_body_entered"]
-[connection signal="timeout" from="SpeedIncreaseTimer" to="." method="_on_SpeedIncreaseTimer_timeout"]
-[connection signal="timeout" from="GasSpeedLinesTimer" to="." method="_on_GasSpeedLinesTimer_timeout"]
+[connection signal="finished" from="GasGasGas" to="." method="_on_GasGasGas_finished"]

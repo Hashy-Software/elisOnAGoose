@@ -15,7 +15,6 @@ func _ready():
 	calculate_switch_blocks()
 	var _error = Global.connect("blocks_switched",self,"calculate_switch_blocks")
 	transition.open()
-	
 	_fill_tile_array()
 
 func _unhandled_input(_event):
@@ -77,13 +76,6 @@ func _on_MapGenerator_body_entered(_collided_body):
 	
 	map_generator.position.x += tile_amount * tile_size
 
-
-func _on_SpeedIncreaseTimer_timeout():
-	if player.speed < 50000:
-		player.speed += 200
-		player_sprite.speed_scale += 0.01
-		print("Player speed=", player.speed, " animation speed scale=", player_sprite.speed_scale)
-
-
-func _on_GasSpeedLinesTimer_timeout():
-	$Player/Camera2D/SpeedLines.visible = true
+func _on_GasGasGas_finished():
+	player.time_elapsed = 0
+	$GasGasGas.play(0)

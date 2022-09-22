@@ -25,3 +25,7 @@ func _process(delta):
 	rotated = not rotated
 	"""
 	pass
+
+
+func _on_Timer_timeout():
+	rotation_degrees = (int(rotation_degrees) + 3) % 6

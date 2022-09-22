@@ -9,7 +9,7 @@ export var speed = 200
 
 export var jump_height = 64.0
 export var jump_time_to_peak = 0.3
-export var jump_time_to_descent = 0.35
+export var jump_time_to_descent = 0.3
 
 export var can_climb = true
 export var climb_speed = 150
@@ -27,6 +27,9 @@ var gravity_influence = {}
 var gravity_normal = DEFAULT_GRAVITY
 var gravity_zchanged = false
 var wind_influence = {}
+
+var time_elapsed = 0
+var drop_speed_multiplier = 1
 
 var velocity = Vector2()
 
@@ -52,7 +55,7 @@ func _process(_delta):
 	$Label.text = STATES.keys()[state]# + " -- " + str(rotation_degrees)
 
 func _physics_process(delta):
-	velocity.x = speed * delta
+	velocity.x = speed * delta * drop_speed_multiplier
 	last_state = state
 	state = get_state()
 	calculate_sprite()
@@ -252,3 +255,30 @@ func teleport(to: Vector2):
 
 func is_player():
 	return true
+
+func _on_SpeedLinesRotation_timeout():
+	if $SpeedLinesCanvas/SpeedLines.visible:
+		$SpeedLinesCanvas/SpeedLines.rotation_degrees = rand_range(-8, 8)
+
+func _on_Timer_timeout():
+	time_elapsed += 1
+
+	var drop_start_times = [40, 103, 178, 229, 242]
+	var drop_duration = 12
+	var drop_stop_times = []
+	
+	for time in drop_start_times:
+		drop_stop_times.append(time + drop_duration)
+		
+	if time_elapsed in drop_stop_times:
+		$SpeedLinesCanvas.visible = false
+		drop_speed_multiplier = 1
+	elif time_elapsed in drop_start_times:
+		$SpeedLinesCanvas.visible = true
+		drop_speed_multiplier = 1.3
+
+func _on_SpeedIncreaseTimer_timeout():
+	if speed < 60_000:
+		speed += 600
+		sprite.speed_scale += 0.03
+		#print("Player speed=", speed, " animation speed scale=", sprite.speed_scale)

@@ -1,10 +1,9 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Player/Assets/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Assets/elisOnAGoose_spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://Player/Assets/honk-sound.mp3" type="AudioStream" id=3]
 [ext_resource path="res://Player/Assets/speedlines.png" type="Texture" id=4]
-[ext_resource path="res://Player/SpeedLines.gd" type="Script" id=5]
 
 [sub_resource type="AtlasTexture" id=22]
 flags = 8
@@ -126,6 +125,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, 8 )
 frames = SubResource( 2 )
 animation = "walk"
+frame = 6
 playing = true
 offset = Vector2( 0, -8 )
 
@@ -156,24 +156,46 @@ margin_bottom = -10.0
 text = "State"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 400, 0 )
 current = true
+zoom = Vector2( 1.1, 1.1 )
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 drag_margin_left = 0.05
 drag_margin_top = 1.0
 drag_margin_right = 0.05
 
-[node name="SpeedLines" type="Sprite" parent="Camera2D"]
-visible = false
-position = Vector2( 1.25004, 2.49998 )
-scale = Vector2( 1.00977, 1.05556 )
-texture = ExtResource( 4 )
-script = ExtResource( 5 )
-
 [node name="HonkSoundStream" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -15.0
 
+[node name="SpeedLinesCanvas" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="SpeedLines" type="Sprite" parent="SpeedLinesCanvas"]
+modulate = Color( 1, 1, 1, 0.133333 )
+position = Vector2( 510, 329 )
+scale = Vector2( 0.34975, 0.252 )
+texture = ExtResource( 4 )
+
+[node name="SpeedLinesRotation" type="Timer" parent="SpeedLinesCanvas"]
+wait_time = 0.05
+autostart = true
+
+[node name="Timer" type="Timer" parent="SpeedLinesCanvas"]
+autostart = true
+
+[node name="HideSpeedLines" type="Timer" parent="SpeedLinesCanvas"]
+wait_time = 12.0
+one_shot = true
+
+[node name="SpeedIncreaseTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="timeout" from="Coyote" to="." method="_on_Coyote_timeout"]
 [connection signal="timeout" from="BufferJump" to="." method="_on_BufferJump_timeout"]
 [connection signal="timeout" from="ForceJump" to="." method="_on_ForceJump_timeout"]
+[connection signal="timeout" from="SpeedLinesCanvas/SpeedLinesRotation" to="." method="_on_SpeedLinesRotation_timeout"]
+[connection signal="timeout" from="SpeedLinesCanvas/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="SpeedLinesCanvas/HideSpeedLines" to="." method="_on_HideSpeedLines_timeout"]
+[connection signal="timeout" from="SpeedIncreaseTimer" to="." method="_on_SpeedIncreaseTimer_timeout"]
