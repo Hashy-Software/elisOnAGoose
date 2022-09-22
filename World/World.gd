@@ -81,4 +81,9 @@ func _on_MapGenerator_body_entered(_collided_body):
 func _on_SpeedIncreaseTimer_timeout():
 	if player.speed < 50000:
 		player.speed += 200
-		#print("Player speed increased to ", player.speed)
+		player_sprite.speed_scale += 0.01
+		print("Player speed=", player.speed, " animation speed scale=", player_sprite.speed_scale)
+
+
+func _on_GasSpeedLinesTimer_timeout():
+	$Player/Camera2D/SpeedLines.visible = true

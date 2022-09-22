@@ -151,7 +151,6 @@ func calculate_wind() -> Vector2:
 
 func calculate_sprite():
 	sprite.playing = true
-	sprite.speed_scale = 1
 	
 	if state == STATES.Walk:
 		sprite.animation = "walk"

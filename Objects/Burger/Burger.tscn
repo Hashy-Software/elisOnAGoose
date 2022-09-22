@@ -88,6 +88,7 @@ animations = [ {
 } ]
 
 [node name="Burger" type="Node2D"]
+scale = Vector2( 0.8, 0.8 )
 
 [node name="BurgerArea" type="Area2D" parent="."]
 scale = Vector2( 0.5, 0.5 )
@@ -102,7 +103,7 @@ shape = SubResource( 1 )
 
 [node name="BurgerAnimation" type="AnimatedSprite" parent="BurgerArea"]
 frames = SubResource( 20 )
-frame = 6
+frame = 12
 playing = true
 
 [node name="MunchPlayer" type="AudioStreamPlayer" parent="BurgerArea"]

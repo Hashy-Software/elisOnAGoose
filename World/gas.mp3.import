@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/gas.mp3-4aaa3207fafdf7721bcd98109531f4a6.mp3str"
+
+[deps]
+
+source_file="res://World/gas.mp3"
+dest_files=[ "res://.import/gas.mp3-4aaa3207fafdf7721bcd98109531f4a6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
