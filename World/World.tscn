@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://World/Background.tres" type="TileSet" id=1]
 [ext_resource path="res://Objects/DeathTrigger/DeathTrigger.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/CoinCounter/CoinCounter.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/gas.mp3" type="AudioStream" id=6]
+[ext_resource path="res://World/parallax_bg.png" type="Texture" id=7]
 [ext_resource path="res://World/Foreground.tres" type="TileSet" id=8]
 [ext_resource path="res://UI/Transition/Transition.tscn" type="PackedScene" id=10]
 [ext_resource path="res://World/World.gd" type="Script" id=11]
@@ -26,6 +27,15 @@ color = Color( 0.12549, 0.129412, 0.141176, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+motion_offset = Vector2( 0, -100 )
+motion_mirroring = Vector2( 2500, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 7 )
+offset = Vector2( 1000, 100 )
 
 [node name="BackgroundMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -55,7 +65,7 @@ scale = Vector2( 512, 1 )
 position = Vector2( 1396, 263 )
 
 [node name="Coin2" parent="Objects" instance=ExtResource( 3 )]
-position = Vector2( 2206, 139 )
+position = Vector2( 2372, 135 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 92, 242 )
@@ -80,7 +90,7 @@ visible = false
 start_closed = true
 
 [node name="Burger2" parent="." instance=ExtResource( 14 )]
-position = Vector2( 1847, 143 )
+position = Vector2( 2139, 136 )
 
 [node name="Burger" parent="." instance=ExtResource( 14 )]
 position = Vector2( 985, 268 )
