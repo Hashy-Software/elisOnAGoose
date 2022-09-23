@@ -12,7 +12,7 @@ func collect():
 	audio.play(0)
 	
 func reposition_ahead():
-	position.x += rand_range(1500, 2500)
+	position.x += rand_range(2000, 2500)
 
 func _on_Coin_body_entered(_body):
 	collect()

@@ -72,9 +72,9 @@ func _on_MapGenerator_body_entered(_collided_body):
 	var tile_size = 16
 	
 	_add_random_ground_tiles(tile_amount)
-	_remove_ground_tiles(tile_amount)
+	#_remove_ground_tiles(tile_amount)
 	
-	map_generator.position.x += tile_amount * tile_size
+	map_generator.position.x += tile_amount * tile_size - 10
 
 func _on_GasGasGas_finished():
 	player.time_elapsed = 0

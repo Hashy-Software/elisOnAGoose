@@ -44,7 +44,7 @@ tile_data = PoolIntArray( 1310715, 8, 0, 1310716, 8, 0, 1310717, 8, 0, 1310718, 
 position = Vector2( 548, 224 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/MapGenerator"]
-position = Vector2( -290, -152 )
+position = Vector2( -371, -147 )
 shape = SubResource( 16 )
 
 [node name="DeathTrigger" parent="Objects" instance=ExtResource( 2 )]
@@ -58,7 +58,7 @@ position = Vector2( 1396, 263 )
 position = Vector2( 2206, 139 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 147, 242 )
+position = Vector2( 92, 242 )
 scale = Vector2( 1, 1 )
 speed = 30000
 jump_height = 120.0
