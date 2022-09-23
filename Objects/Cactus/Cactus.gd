@@ -10,9 +10,11 @@ func reposition_ahead():
 	position.x += 2000
 	animation.frame = (animation.frame + 1) % animation.frames.get_frame_count("default")
 
-func _on_Cactus_body_entered(_body):
-	# TODO: kill player
-	pass
 
 func _on_Cactus_screen_exited():
 	reposition_ahead()
+	
+
+func _on_Cactus_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	if body.has_method("death"):
+		body.death()
