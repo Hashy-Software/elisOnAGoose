@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://World/Background.tres" type="TileSet" id=1]
 [ext_resource path="res://Objects/DeathTrigger/DeathTrigger.tscn" type="PackedScene" id=2]
@@ -11,10 +11,106 @@
 [ext_resource path="res://Objects/Cactus/Cactus.tscn" type="PackedScene" id=9]
 [ext_resource path="res://UI/Transition/Transition.tscn" type="PackedScene" id=10]
 [ext_resource path="res://World/World.gd" type="Script" id=11]
+[ext_resource path="res://Objects/dino.png" type="Texture" id=12]
+[ext_resource path="res://Objects/single_dino.png" type="Texture" id=13]
 [ext_resource path="res://Objects/Burger/Burger.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 23, 215 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 88, 95 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 12 )
+region = Rect2( 176, 0, 88, 95 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 12 )
+region = Rect2( 264, 0, 88, 95 )
+
+[sub_resource type="SpriteFrames" id=22]
+animations = [ {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 19 ), SubResource( 21 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Shader" id=23]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise_tex_normal;
+uniform sampler2D noise_tex;
+uniform float progress : hint_range(0.0, 1.0);
+uniform float strength = 1.0;
+
+// If your sprite doesn't have enough space and the explosion gets clipped, 
+// you can uncomment this and adjust the scale
+//void vertex() {
+//	float scale = 3.0;
+//	VERTEX *= scale;
+//
+//	UV *= scale;
+//	UV -= (scale - 1.0) / 2.0;
+//}
+
+void fragment() {
+	vec2 direction = texture(noise_tex_normal, UV).xy; // We're using normal map as direction
+	direction -= 0.5; // Since our normal map is a texture, it ranges from 0.0 to 1.0...
+	direction *= 2.0; // ...so we're going to make it range from -1.0 to 1.0.
+	direction = direction * strength * progress;
+	
+	// UV for exploded texture
+	vec2 tex_size = 1.0 / TEXTURE_PIXEL_SIZE; // Real texture size in pixels
+	vec2 uv = floor(UV * tex_size) / (tex_size - 1.0); // Pixelate UV to snap pixels
+	uv = uv - direction; // Distort UV
+	
+	// Texture with exploded UV
+	vec4 tex = texture(TEXTURE, uv); 
+	
+	// Dissolve alpha
+	float dissolve = texture(noise_tex, UV).x;
+	dissolve = step(progress, dissolve);
+	tex.a *= dissolve;
+	
+	// Border (in case the edge of your sprite stretches, otherwise you can remove this block)
+	vec2 border_uv = uv * 2.0 - 1.0;
+	border_uv = clamp(abs(border_uv), 0.0, 1.0);
+	float border = max(border_uv.x, border_uv.y);
+	border = ceil(1.0 - border);
+	tex.a *= border;
+	
+	COLOR = tex;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=25]
+period = 0.1
+
+[sub_resource type="NoiseTexture" id=26]
+flags = 2
+width = 88
+height = 94
+noise = SubResource( 25 )
+
+[sub_resource type="OpenSimplexNoise" id=27]
+seed = 7
+period = 0.1
+
+[sub_resource type="NoiseTexture" id=28]
+flags = 2
+width = 88
+height = 94
+as_normalmap = true
+noise = SubResource( 27 )
+
+[sub_resource type="ShaderMaterial" id=24]
+shader = SubResource( 23 )
+shader_param/progress = 0.0
+shader_param/strength = 1.0
+shader_param/noise_tex_normal = SubResource( 28 )
+shader_param/noise_tex = SubResource( 26 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 11 )
@@ -72,9 +168,10 @@ position = Vector2( 1396, 263 )
 position = Vector2( 2372, 135 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 92, 242 )
 scale = Vector2( 1, 1 )
-speed = 30000
+speed = 0
 jump_height = 120.0
 jump_time_to_peak = 0.25
 jump_time_to_descent = 0.25
@@ -104,5 +201,28 @@ stream = ExtResource( 6 )
 volume_db = -18.0
 autoplay = true
 
+[node name="Dino" type="Area2D" parent="."]
+position = Vector2( 82, 255 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Dino"]
+frames = SubResource( 22 )
+frame = 3
+playing = true
+
+[node name="Sprite" type="Sprite" parent="Dino"]
+visible = false
+material = SubResource( 24 )
+texture = ExtResource( 13 )
+
+[node name="StartPixelExplosion" type="Timer" parent="Dino"]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="ApplyPixelExplosion" type="Timer" parent="Dino"]
+wait_time = 0.01
+
 [connection signal="body_entered" from="Objects/MapGenerator" to="." method="_on_MapGenerator_body_entered"]
 [connection signal="finished" from="GasGasGas" to="." method="_on_GasGasGas_finished"]
+[connection signal="timeout" from="Dino/StartPixelExplosion" to="." method="_on_StartPixelExplosion_timeout"]
+[connection signal="timeout" from="Dino/ApplyPixelExplosion" to="." method="_on_ApplyPixelExplosion_timeout"]

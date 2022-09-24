@@ -79,3 +79,20 @@ func _on_MapGenerator_body_entered(_collided_body):
 func _on_GasGasGas_finished():
 	player.time_elapsed = 0
 	$GasGasGas.play(0)
+
+
+func _on_StartPixelExplosion_timeout():
+	$Dino/ApplyPixelExplosion.start()
+	$Dino/Sprite.visible = true
+	$Dino/AnimatedSprite.visible = false
+
+
+func _on_ApplyPixelExplosion_timeout():
+		
+	$Dino/Sprite.material.set_shader_param("progress", $Dino/Sprite.material.get_shader_param("progress") + 0.01)
+	if $Dino/Sprite.material.get_shader_param("progress") > 1:
+		$Dino/ApplyPixelExplosion.stop()
+		$Player.speed = 30_000
+	elif $Dino/Sprite.material.get_shader_param("progress") > 0.5:
+		player.visible = true
+		

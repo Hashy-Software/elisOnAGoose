@@ -14,7 +14,6 @@ func reposition_ahead():
 func _on_Cactus_screen_exited():
 	reposition_ahead()
 	
-
 func _on_Cactus_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body.has_method("death"):
 		body.death()
