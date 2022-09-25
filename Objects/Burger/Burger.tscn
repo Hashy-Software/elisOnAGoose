@@ -103,7 +103,7 @@ shape = SubResource( 1 )
 
 [node name="BurgerAnimation" type="AnimatedSprite" parent="BurgerArea"]
 frames = SubResource( 20 )
-frame = 1
+frame = 5
 playing = true
 
 [node name="MunchPlayer" type="AudioStreamPlayer" parent="BurgerArea"]

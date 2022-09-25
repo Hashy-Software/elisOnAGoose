@@ -6,11 +6,13 @@ export var has_collision = true
 onready var notifier = $BurgerArea/VisibilityNotifier2D
 onready var munch_player = $BurgerArea/MunchPlayer
 onready var collision = $BurgerArea/BurgerCollisionShape
+onready var animation = $BurgerArea/BurgerAnimation
 
 func _ready():
 	visible = is_visible
 	collision.disabled = not has_collision
 	notifier.connect("screen_exited", self, "_on_screen_exited")
+	animation.play("default", true)
 
 func reposition_ahead():
 	visible = bool(randi() % 2)
