@@ -216,7 +216,6 @@ position = Vector2( 95, 255 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Dino"]
 frames = SubResource( 22 )
-frame = 1
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Dino"]
@@ -240,7 +239,7 @@ margin_bottom = 179.0
 text = "Press SPACE twice to double-jump"
 
 [node name="HideDoubleJumpLabel" type="Timer" parent="DoubleJumpLabel"]
-wait_time = 2.0
+wait_time = 3.0
 one_shot = true
 autostart = true
 
