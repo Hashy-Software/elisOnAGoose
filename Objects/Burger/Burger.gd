@@ -1,21 +1,21 @@
-extends Area2D
+extends Node2D
 
+export var is_visible = true
+export var has_collision = true
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-onready var notifier = $VisibilityNotifier2D
-onready var munch_player = $MunchPlayer
+onready var notifier = $BurgerArea/VisibilityNotifier2D
+onready var munch_player = $BurgerArea/MunchPlayer
+onready var collision = $BurgerArea/BurgerCollisionShape
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	visible = is_visible
+	collision.disabled = not has_collision
 	notifier.connect("screen_exited", self, "_on_screen_exited")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 func reposition_ahead():
-	position.x += rand_range(2000, 3000)
+	visible = bool(randi() % 2)
+	collision.disabled = not visible
+	position.x += 2000
 
 func _on_BurgerArea_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
 	reposition_ahead()

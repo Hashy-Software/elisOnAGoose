@@ -147,8 +147,11 @@ tile_data = PoolIntArray( 1310715, 8, 0, 1310716, 8, 0, 1310717, 8, 0, 1310718, 
 
 [node name="Objects" type="Node2D" parent="."]
 
+[node name="Cactus2" parent="Objects" instance=ExtResource( 9 )]
+position = Vector2( 1173, 262 )
+
 [node name="Cactus" parent="Objects" instance=ExtResource( 9 )]
-position = Vector2( 1106, 258 )
+position = Vector2( 1106, 262 )
 
 [node name="MapGenerator" type="Area2D" parent="Objects"]
 position = Vector2( 548, 224 )
@@ -161,11 +164,24 @@ shape = SubResource( 16 )
 position = Vector2( 512, 592 )
 scale = Vector2( 512, 1 )
 
-[node name="Coin" parent="Objects" instance=ExtResource( 3 )]
-position = Vector2( 1396, 263 )
+[node name="CoinBeforeCactus" parent="Objects" instance=ExtResource( 3 )]
+position = Vector2( 1015, 276 )
+
+[node name="CoinAfterCactus" parent="Objects" instance=ExtResource( 3 )]
+position = Vector2( 1943, 171 )
+
+[node name="BurgerAfter" parent="Objects" instance=ExtResource( 14 )]
+position = Vector2( 1942, 261 )
+is_visible = false
+has_collision = false
 
 [node name="Coin2" parent="Objects" instance=ExtResource( 3 )]
-position = Vector2( 2372, 135 )
+position = Vector2( 1517, 265 )
+
+[node name="BurgerAboveCactus" parent="Objects" instance=ExtResource( 14 )]
+position = Vector2( 1109, 160 )
+is_visible = false
+has_collision = false
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 visible = false
@@ -190,19 +206,13 @@ margin_bottom = 49.0
 visible = false
 start_closed = true
 
-[node name="Burger2" parent="." instance=ExtResource( 14 )]
-position = Vector2( 2139, 136 )
-
-[node name="Burger" parent="." instance=ExtResource( 14 )]
-position = Vector2( 1616, 264 )
-
 [node name="GasGasGas" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -18.0
 autoplay = true
 
 [node name="Dino" type="Area2D" parent="."]
-position = Vector2( 82, 255 )
+position = Vector2( 95, 255 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Dino"]
 frames = SubResource( 22 )
@@ -219,10 +229,9 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="ApplyPixelExplosion" type="Timer" parent="Dino"]
-wait_time = 0.01
+[node name="Coin" parent="." instance=ExtResource( 3 )]
+position = Vector2( 2312, 257 )
 
 [connection signal="body_entered" from="Objects/MapGenerator" to="." method="_on_MapGenerator_body_entered"]
 [connection signal="finished" from="GasGasGas" to="." method="_on_GasGasGas_finished"]
 [connection signal="timeout" from="Dino/StartPixelExplosion" to="." method="_on_StartPixelExplosion_timeout"]
-[connection signal="timeout" from="Dino/ApplyPixelExplosion" to="." method="_on_ApplyPixelExplosion_timeout"]

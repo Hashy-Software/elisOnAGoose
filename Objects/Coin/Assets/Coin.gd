@@ -2,6 +2,7 @@ extends Area2D
 
 onready var audio = $AudioStreamPlayer
 onready var notifier = $VisibilityNotifier2D
+onready var collision = $CollisionShape2D
 
 func _ready():
 	Global.init_coin()
@@ -12,7 +13,9 @@ func collect():
 	audio.play(0)
 	
 func reposition_ahead():
-	position.x += rand_range(2000, 3000)
+	visible = bool(randi() % 2)
+	collision.disabled = not visible
+	position.x += 2000
 
 func _on_Coin_body_entered(_body):
 	collect()

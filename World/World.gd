@@ -5,10 +5,29 @@ onready var tilemap = $WorldMap
 onready var player = $Player
 onready var player_sprite = $Player/Sprite
 onready var map_generator = $Objects/MapGenerator
+onready var dino = $Dino
+onready var dino_sprite = $Dino/Sprite
+onready var dino_animated_sprite = $Dino/AnimatedSprite
 
 var _tile_creator_timer = null
 var _last_tile_pos = Vector2(69, 19)
 var _tile_array_vector2ds = []
+var _start_pixel_explosion = false
+
+func _process(_delta):
+	if _start_pixel_explosion:
+		var dino_shader = dino_sprite.material
+		var dino_shader_progress = dino_shader.get_shader_param("progress")
+		print("C")
+		if dino_shader_progress > 1:
+			player.speed = 30_000
+			dino_animated_sprite.visible = false
+			dino_sprite.visible = false
+			_start_pixel_explosion = false
+		elif dino_shader_progress > 0.5:
+			player.visible = true
+		
+		dino_shader.set_shader_param("progress", dino_shader_progress + 0.01)
 
 func _ready():
 	Global.text_box = ""
@@ -16,6 +35,7 @@ func _ready():
 	var _error = Global.connect("blocks_switched",self,"calculate_switch_blocks")
 	transition.open()
 	_fill_tile_array()
+	$Dino/StartPixelExplosion.start()
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("pause"):
@@ -74,25 +94,18 @@ func _on_MapGenerator_body_entered(_collided_body):
 	_add_random_ground_tiles(tile_amount)
 	#_remove_ground_tiles(tile_amount)
 	
-	map_generator.position.x += tile_amount * tile_size - 10
+	map_generator.position.x += tile_amount * tile_size
 
 func _on_GasGasGas_finished():
 	player.time_elapsed = 0
 	$GasGasGas.play(0)
 
-
 func _on_StartPixelExplosion_timeout():
+	_start_pixel_explosion = true
+	dino_sprite.visible = true
+	dino_animated_sprite.visible = false
+	"""
 	$Dino/ApplyPixelExplosion.start()
 	$Dino/Sprite.visible = true
 	$Dino/AnimatedSprite.visible = false
-
-
-func _on_ApplyPixelExplosion_timeout():
-		
-	$Dino/Sprite.material.set_shader_param("progress", $Dino/Sprite.material.get_shader_param("progress") + 0.01)
-	if $Dino/Sprite.material.get_shader_param("progress") > 1:
-		$Dino/ApplyPixelExplosion.stop()
-		$Player.speed = 30_000
-	elif $Dino/Sprite.material.get_shader_param("progress") > 0.5:
-		player.visible = true
-		
+	"""

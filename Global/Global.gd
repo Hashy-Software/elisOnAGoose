@@ -29,4 +29,4 @@ func restart_game():
 	block_switch = true
 	text_box = ""
 	
-	var _error = get_tree().reload_current_scene()
+	var _error = get_tree().change_scene("res://UI/Menu.tscn")
