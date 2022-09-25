@@ -104,8 +104,6 @@ func _on_StartPixelExplosion_timeout():
 	_start_pixel_explosion = true
 	dino_sprite.visible = true
 	dino_animated_sprite.visible = false
-	"""
-	$Dino/ApplyPixelExplosion.start()
-	$Dino/Sprite.visible = true
-	$Dino/AnimatedSprite.visible = false
-	"""
+
+func _on_HideDoubleJumpLabel_timeout():
+	$DoubleJumpLabel.visible = false
