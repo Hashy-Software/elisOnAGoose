@@ -12,7 +12,6 @@ func _ready():
 	visible = is_visible
 	collision.disabled = not has_collision
 	notifier.connect("screen_exited", self, "_on_screen_exited")
-	animation.play("default", true)
 
 func reposition_ahead():
 	visible = bool(randi() % 2)
