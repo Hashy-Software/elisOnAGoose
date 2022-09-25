@@ -39,12 +39,20 @@ var buffer_jump = false
 var on_ground = false
 var forced_jump = false
 
+var is_dying = false
+var death_by = ""
+
 var boost_normal = Vector2()
 var boost_strength = speed*4
 var boost_duration = 0
 
 enum STATES {Walk, Jump, Fall}
 var state = STATES.Walk
+var burgers_hit = 0
+
+enum STAGES {Normal, Stage1, Stage2}
+var stage = STAGES.Normal
+
 var last_state = state
 
 #func _ready():
@@ -53,6 +61,30 @@ var last_state = state
 func _process(_delta):
 	get_input()
 	$Label.text = STATES.keys()[state]# + " -- " + str(rotation_degrees)
+	
+	if is_dying:
+		$YouDiedCanvas.visible = true
+		
+		if death_by == "cactus":
+			var player_shader = sprite.material
+			var player_shader_progress = player_shader.get_shader_param("progress")
+			speed = 0
+			if player_shader_progress >= 1:
+				Global.restart_game()
+			else:
+				player_shader.set_shader_param("progress", player_shader_progress + 0.008)
+		
+		elif death_by == "burger":
+			if not $NukeSprites.visible:
+				$NukeAudio.play(0.8)
+				
+			speed = 0
+			sprite.visible = false
+			$NukeSprites.visible = true
+			$NukeSprites.playing = true
+			
+		else:
+			Global.restart_game()
 
 func _physics_process(delta):
 	velocity.x = speed * delta * drop_speed_multiplier
@@ -155,8 +187,17 @@ func calculate_wind() -> Vector2:
 func calculate_sprite():
 	sprite.playing = true
 	
+	var stage_suffix
+	
+	if stage == STAGES.Normal:
+		stage_suffix = ""
+	elif stage == STAGES.Stage1:
+		stage_suffix = "_s1"
+	elif stage == STAGES.Stage2:
+		stage_suffix = "_s2"
+	
 	if state == STATES.Walk:
-		sprite.animation = "walk"
+		sprite.animation = "walk" + stage_suffix
 	elif state == STATES.Jump:
 		sprite.scale = (sprite.scale + Vector2(1.18,0.85))/2
 		
@@ -165,14 +206,14 @@ func calculate_sprite():
 #			stween.remove_all()
 #			stween.interpolate_property(sprite,"scale",null,Vector2(1.25,0.8),0.3,Tween.TRANS_SINE,Tween.EASE_OUT)
 #			stween.start()
-		sprite.animation = "jump"
+		sprite.animation = "jump" + stage_suffix
 	elif state == STATES.Fall:
 		if !is_on_ceiling():
 			if last_state != STATES.Fall:
 				stween.remove_all()
 				stween.interpolate_property(sprite,"scale",null,Vector2(0.85,1.18),0.35,Tween.TRANS_SINE,Tween.EASE_OUT)
 				stween.start()
-			sprite.animation = "fall"
+			sprite.animation = "fall" + stage_suffix
 	
 	if state != STATES.Jump && state != STATES.Fall && sprite.scale != Vector2(1,1):
 		if last_state == STATES.Jump || last_state == STATES.Fall:
@@ -247,8 +288,9 @@ func _on_BufferJump_timeout():
 func _on_ForceJump_timeout():
 	forced_jump = false
 
-func death():
-	Global.restart_game()
+func death(reason):
+	death_by = reason
+	is_dying = true
 
 func teleport(to: Vector2):
 	set_position(to)
@@ -282,3 +324,7 @@ func _on_SpeedIncreaseTimer_timeout():
 		speed += 600
 		sprite.speed_scale += 0.03
 		#print("Player speed=", speed, " animation speed scale=", sprite.speed_scale)
+
+
+func _on_NukeSprites_animation_finished():
+	Global.restart_game()

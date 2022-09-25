@@ -18,7 +18,7 @@ func _process(_delta):
 	if _start_pixel_explosion:
 		var dino_shader = dino_sprite.material
 		var dino_shader_progress = dino_shader.get_shader_param("progress")
-		print("C")
+		
 		if dino_shader_progress > 1:
 			player.speed = 30_000
 			dino_animated_sprite.visible = false
