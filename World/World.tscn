@@ -216,6 +216,7 @@ position = Vector2( 95, 255 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Dino"]
 frames = SubResource( 22 )
+frame = 1
 playing = true
 
 [node name="Sprite" type="Sprite" parent="Dino"]

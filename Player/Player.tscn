@@ -916,7 +916,7 @@ material = SubResource( 28 )
 position = Vector2( 8.75, 8.75 )
 frames = SubResource( 2 )
 animation = "walk_s2"
-frame = 14
+frame = 11
 playing = true
 offset = Vector2( 0, -8 )
 

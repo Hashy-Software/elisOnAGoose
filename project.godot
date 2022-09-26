@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="elisOnAGoose The Game"
+config/name="elisOnAGoose"
 run/main_scene="res://UI/Menu.tscn"
 boot_splash/image="res://UI/Black.png"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
