@@ -4,6 +4,7 @@ onready var notifier = $VisibilityNotifier2D
 onready var animation = $Animation
 onready var collision = $CollisionShape2D
 
+
 func reposition_ahead():
 	position.x += 2000
 	animation.frame = randi() % animation.frames.get_frame_count("default")

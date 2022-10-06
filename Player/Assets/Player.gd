@@ -18,6 +18,8 @@ export(int, 1, 100) var jump_count = 2
 export var can_glide = true
 export var can_gravity = true
 
+export var is_death_enabled = true
+
 onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
@@ -41,6 +43,7 @@ var forced_jump = false
 
 var is_dying = false
 var death_by = ""
+var initial_speed_backup = 0
 
 var boost_normal = Vector2()
 var boost_strength = speed*4
@@ -55,7 +58,9 @@ var stage = STAGES.Normal
 
 var last_state = state
 
-#func _ready():
+func _ready():
+	initial_speed_backup = speed
+	speed = 0
 #	check_abilities()
 
 func _process(_delta):
@@ -87,7 +92,7 @@ func _process(_delta):
 			Global.restart_game()
 
 func _physics_process(delta):
-	velocity.x = speed * delta * drop_speed_multiplier
+	velocity.x = int(speed * delta * drop_speed_multiplier)
 	last_state = state
 	state = get_state()
 	calculate_sprite()
@@ -97,6 +102,7 @@ func _physics_process(delta):
 		on_ground = true
 		jump_left = jump_count
 	else:
+		#print("Player position = ", position)
 		if $Coyote.is_stopped() && on_ground == true:
 			$Coyote.start()
 	
@@ -277,20 +283,10 @@ func check_abilities():
 	can_glide = Global.has_ability("glide")
 	can_gravity = Global.has_ability("gravity")
 
-func _on_Coyote_timeout():
-	on_ground = is_on_floor()
-	if !on_ground && jump_left == jump_count:
-		jump_left = jump_count - 1
-
-func _on_BufferJump_timeout():
-	buffer_jump = false
-
-func _on_ForceJump_timeout():
-	forced_jump = false
-
 func death(reason):
-	death_by = reason
-	is_dying = true
+	if is_death_enabled:
+		death_by = reason
+		is_dying = true
 
 func teleport(to: Vector2):
 	set_position(to)
@@ -320,11 +316,10 @@ func _on_Timer_timeout():
 		drop_speed_multiplier = 1.3
 
 func _on_SpeedIncreaseTimer_timeout():
-	if speed < 60_000:
-		speed += 600
+	if speed < 2 * initial_speed_backup:
+		speed += int(initial_speed_backup / 100)
 		sprite.speed_scale += 0.03
 		#print("Player speed=", speed, " animation speed scale=", sprite.speed_scale)
-
 
 func _on_NukeSprites_animation_finished():
 	Global.restart_game()
